@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Pocket Tanks</title>
+	<link rel="stylesheet" type="text/css" href="style.css">
+	<script type="text/javascript" src="tank.js"></script>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<body>
+<div id="header">
+<span id="play">►</span>
+<span id="pause">||</span>
+<span id="instruction">INSTRUCTIONS</span>
+<span id="gamename">POCKET TANKS<span>
+<span id="restart">RESTART</span>
+</div>
+
+<canvas>
+</canvas>
+
+<div id="control"> 
+<span id="firebtn">FIRE</span>
+<span id="powerbtn">POWER</span>
+<span id="anglebtn">ANGLE</span>
+<span  id="weapons">
+  <input type="radio" name="weapon" value="bullet" id="bullet"> Bullet
+  <input type="radio" name="weapon" value="bomb" id="bomb"> Bomb
+</span>
+</div>
+
+<div id="angle">
+<input type="number" id="inputangle" min="0" max="359"/>
+<span id="anglesave">✔</span>
+</div>
+
+<div id="power">
+<input type="number" id="inputpower" min="0" max="100"/>
+<span id="powersave">✔</span>
+</div>
+
+
+
+
+</body>
+</html>

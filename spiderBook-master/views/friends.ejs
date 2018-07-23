@@ -1,0 +1,128 @@
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>Calendar</title>
+
+    <!-- Bootstrap core CSS -->
+    <link rel="stylesheet" type="text/css" href="../../../public/bootstrap.css">
+    <!-- Custom styles for this template -->
+    <link rel="stylesheet" type="text/css" href="../../../public/styles.css">
+  </head>
+
+  <body >
+    <nav class="navbar navbar-dark bg-dark fixed-top">
+      <a class="navbar-brand" href="">Books</a>
+      <div>
+        <ul class="nav nav-pills float-right">
+          <li>
+            <form class="form-inline my-2 my-lg-0" method="POST" action="/query">
+              <select class="form-control mr-sm-2" name="category">
+                <option value="intitle:">Title</option>
+                <option value="isbn:">ISBN</option>
+                <option value="inauthor:">Author</option>
+                <option value="inpublisher:">Publisher</option>
+                <option value="subject:">Subject</option>
+              </select>
+              <input class="form-control mr-sm-2" type="text" placeholder="Search Books" name="search">
+              <button style="background:#343a40;padding:0px " class="btn  my-2 my-sm-0" type="submit"><i class="fa fa-search" style="font-size:25px;color:white;cursor:pointer"></i></button>
+            </form>
+        </li>
+          <li class="nav-item active">
+            <a class="nav-link" style="color:white; font-size:large" href="/">Home <span class="sr-only"></span></a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" style="color:white; font-size:large" href="/<%=user%>/friends">Friends</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" style="color:white; font-size:large" href="/<%=user%>/activity">Activity</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" style="color:white; font-size:large" href="/logout">Logout</a>
+        </ul>
+      </div>
+    </nav>
+
+
+      <div class="starter-template">
+        <div class="month" style="height:10%">
+        <ul>
+        <li>
+        </li>
+        </ul>
+        </div>
+        <div class="modal-body row">
+        <div class="col-md-6" >
+          <div id="part1">
+            <h3><center>ACTIVITY</center></h3>
+          <div id="activity"></div>
+          </div>
+        </div>
+        <div class="col-md-6" >
+          <div id="part2">
+            <h3><center>SEARCH USER</center></h3><br>
+            <div class="control">
+              <form method='POST' action="">
+              <label >Search For:</label>
+              <input type="text" id="username"  name="invite" placeholder="Username" autocomplete="false" required /><br>
+              <br><label > ‏‏‎ </label>
+              <input type="submit" value="Search" id="sub" />
+            </form>
+            </div>
+          </div>
+        </div>
+</div>
+
+      </div>
+
+    <script>
+      var http = new XMLHttpRequest();
+      var user = '<%=user%>';
+      var sub = document.getElementById('sub');
+      var actDisplay = document.getElementById('activity');
+      var friend = document.getElementById('username');
+      sub.addEventListener('click',function(e){
+        e.preventDefault();
+        console.log(friend.value);
+        actDisplay.innerHTML="";
+        search(friend.value);
+      })
+    function search(user)
+    {
+      var url ="/ajax/activity/"+user;
+      console.log(url);
+      http.open("GET", url, true);
+      http.send(null);
+      http.onreadystatechange = function()
+      {
+         if (http.readyState == 4 && http.status == 200)
+         {
+          call = JSON.parse(http.responseText);
+          console.log(call);
+          if(call)
+          {
+            console.log('hey');
+            call.activity.forEach(function(act){
+              if(act.type == 'want')
+              {
+                actDisplay.innerHTML+=`<strong>${friend.value}</strong> wants to read <h4> ${act.title}</h4><br><br>`;
+              }
+              if(act.type == 'read')
+              {
+                actDisplay.innerHTML+=`<strong>${friend.value}</strong> read <h4> ${act.title}</h4><br><br>`;
+              }
+              if(act.type == 'reading')
+              {
+                actDisplay.innerHTML+=`<strong>${friend.value}</strong> is reading <h4> ${act.title}</h4><br><br>`;
+              }
+            });
+          }
+      };
+    }
+  }
+    </script>
+
+  </body>
+</html>

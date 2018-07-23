@@ -1,0 +1,155 @@
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>Books</title>
+
+    <!-- Bootstrap core CSS -->
+    <link rel="stylesheet" type="text/css" href="../../public/bootstrap.css">
+    <!-- Custom styles for this template -->
+    <link rel="stylesheet" type="text/css" href="../../public/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  </head>
+
+  <body >
+    <nav class="navbar navbar-dark bg-dark fixed-top">
+      <a class="navbar-brand" href="">Books</a>
+      <div>
+        <ul class="nav nav-pills float-right">
+          <li>
+            <form class="form-inline my-2 my-lg-0" method="POST" action="/query">
+              <select class="form-control mr-sm-2" name="category">
+                <option value="intitle:">Title</option>
+                <option value="isbn:">ISBN</option>
+                <option value="inauthor:">Author</option>
+                <option value="inpublisher:">Publisher</option>
+                <option value="subject:">Subject</option>
+              </select>
+              <input class="form-control mr-sm-2" type="text" placeholder="Search Books" name="search">
+              <button style="background:#343a40;padding:0px " class="btn  my-2 my-sm-0" type="submit"><i class="fa fa-search" style="font-size:25px;color:white;cursor:pointer"></i></button>
+            </form>
+        </li>
+          <li class="nav-item active">
+            <a class="nav-link" style="color:white; font-size:large" href="/">Home <span class="sr-only"></span></a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" style="color:white; font-size:large" href="/<%=user%>/friends">Friends</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" style="color:white; font-size:large" href="/<%=user%>/activity">Activity</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" style="color:white; font-size:large" href="/logout">Logout</a>
+        </ul>
+      </div>
+    </nav>
+
+    <% include partials/checkId.ejs %>
+    <% include partials/checkLike.ejs %>
+    <% include partials/checkStatus.ejs %>
+
+      <div class="starter-template">
+        <div id="display">
+          <%if(items){%>
+          <%items.forEach(function(result){%>
+          <div id="book">
+            <div id="head">
+            <h3><a href="<%=result.id%>"><%=result.volumeInfo.title%></a></h3>
+            <%if(result.volumeInfo.imageLinks){%>
+              <% var avail = checkId(result.id,info)%>
+            <img style="float:right" src=<%=result.volumeInfo.imageLinks.smallThumbnail%>/><br><%}%>
+            <%if(avail){%>
+              <strong>Status: <%=checkStatus(result.id,info)%></strong><br>
+            <%}%>
+            <select name="status" >
+              <option value="want">Want To Read</option>
+              <option value="reading">Reading</option>
+              <option value="read">Read</option>
+            </select>&nbsp<button style="cursor:pointer"  class="checkBtn"  id=<%=result.id%>>✔</button><br>
+            <input type="checkbox" name="favourite" class="favBtn" value="favourite" id=<%=result.id%>>&nbspFavourite<br>
+            Pages: <%=result.volumeInfo.pageCount%><br>
+            Rating:<%=result.volumeInfo.averageRating%><br>
+            Author: <%=result.volumeInfo.authors%><div><br>
+              <div id="description">
+                <%=result.volumeInfo.description%>
+              </div>
+              <span class="like" id=<%=result.id%> style="color:<%if(checkLike(result.id,info)){%>blue<%}%>">Like</span>
+              <hr>
+            </div>
+          </div>
+        </div>
+      <%});%><%}else{%>
+        No Books Available for this search
+    <%}%>
+
+
+<script>
+var http = new XMLHttpRequest();
+document.addEventListener('DOMContentLoaded', function (){
+document.querySelectorAll(".checkBtn").forEach(function(btn){
+  btn.addEventListener('click', function(e){
+  e.preventDefault();
+  let status = e.target.parentElement.querySelector('select').value;
+  let img = e.target.parentElement.querySelector('img').src;
+  let title = e.target.parentElement.querySelector('a').innerHTML;
+  check(e.target.id, status, img, title);
+  console.log('prevented');
+  });
+});
+
+document.querySelectorAll(".like").forEach(function(btn){
+  btn.addEventListener('click', function(e){
+
+  console.log('c',e.target.style);
+
+  if(e.target.style.color!='blue')
+  {
+    e.target.style.color='blue';
+    var url ="/ajax/like?id="+e.target.id+'&like=true';
+  }
+  else
+  {
+    e.target.style.color='black';
+    var url ="/ajax/like?id="+e.target.id+"&like=false";
+  }
+  console.log('Like',url);
+
+  http.open("GET", url, true);
+  http.send(null);
+
+  });
+});
+
+document.querySelectorAll(".favBtn").forEach(function(btn){
+  btn.addEventListener('click', function(e){
+  let fav = e.target.checked;
+  console.log(fav);
+  let id = e.target.id;
+  let img = e.target.parentElement.querySelector('img').src;
+  let title = e.target.parentElement.querySelector('a').innerHTML;
+  var url ="/ajax/bookFav?id="+id+"&fav="+fav+"&title="+title+"&img="+img;
+  console.log(url);
+  http.open("GET", url, true);
+  http.send(null);
+
+  });
+});
+
+});
+
+
+
+  function check(id, status, img, title){
+    console.log(id, status);
+    console.log('img',img);
+    var url ="/ajax/book?id="+id+"&status="+status+"&img="+img+"&title="+title;
+    console.log(url);
+    http.open("GET", url, true);
+    http.send(null);
+};
+
+</script>
+  </body>
+</html>

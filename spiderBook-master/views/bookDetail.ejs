@@ -1,0 +1,85 @@
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>Books</title>
+
+    <!-- Bootstrap core CSS -->
+    <link rel="stylesheet" type="text/css" href="../../public/bootstrap.css">
+    <!-- Custom styles for this template -->
+    <link rel="stylesheet" type="text/css" href="../../public/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  </head>
+
+  <body >
+
+    <nav class="navbar navbar-dark bg-dark fixed-top">
+      <a class="navbar-brand" href="">Books</a>
+      <div>
+        <ul class="nav nav-pills float-right">
+          <li>
+            <form class="form-inline my-2 my-lg-0" method="POST" action="/query">
+              <input class="form-control mr-sm-2" type="text" placeholder="Search Books" name="search">
+              <button style="background:#343a40;padding:0px " class="btn  my-2 my-sm-0" type="submit"><i class="fa fa-search" style="font-size:25px;color:white;cursor:pointer"></i></button>
+            </form>
+        </li>
+          <li class="nav-item active">
+            <a class="nav-link" style="color:white; font-size:large" href="/">Home <span class="sr-only"></span></a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" style="color:white; font-size:large" href="invites">Friends</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" style="color:white; font-size:large" href="/logout">Logout</a>
+        </ul>
+      </div>
+    </nav>
+
+
+
+
+      <div class="starter-template">
+        <div id="display">
+          <div id="book">
+
+            <h3><%=result.volumeInfo.title%></h3>
+            <%if(result.volumeInfo.imageLinks){%>
+            <img style="float:right" src=<%=result.volumeInfo.imageLinks.smallThumbnail%>/><br><%}%>
+            Pages: <%=result.volumeInfo.pageCount%><br>
+            Rating:<%=result.volumeInfo.averageRating%><br>
+            Author: <%=result.volumeInfo.authors%><div><br>
+              <div id="description">
+                <%=result.volumeInfo.description%>
+              </div>
+              <br>
+              <span id="like">Like</span>&nbsp&nbsp&nbsp
+            <span id="rate">
+              <select>
+                <option disabled selected value>Rate</option>
+                <option>1</option>
+                <option>2</option>
+                <option>3</option>
+                <option>4</option>
+                <option>5</option>
+              </select>
+            </span><br><br>
+            <form action=""  method="POST">
+            <textarea rows="4" cols="70" placeholder="Comment" name='comment'></textarea><br><br>
+            <input type="submit">
+          </form><br>
+            <h2>Comments</h2>
+            <div id="comment">
+              <%if(comments){%>
+              <%comments.comment.forEach(function(info){%>
+                <p><strong><%=info.user%>: </strong><%=info.text%></p>
+              <%})%>
+              <%}%>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

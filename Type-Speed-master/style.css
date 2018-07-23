@@ -1,0 +1,20 @@
+#green {
+    color:green;
+    font-family: serif;
+    font-size: x-large;
+
+}
+
+#red {
+    color:red;
+    background: rgba(255,0,0,0.3);
+    font-family: serif;
+	font-size: x-large;
+   
+}
+
+#black {
+    color:black;
+    font-family: serif;
+	font-size: x-large;
+}

@@ -1,0 +1,30 @@
+<html>
+<head>
+	<title>ToDoApp</title>
+  <link rel="stylesheet" type="text/css" href="../../../../public/styles.css">
+</head>
+<body>
+<% include partials/header.ejs %>
+<div class ="main">
+  <h2>EDIT TODO</h2>
+  <!-- <form method="POST" action="">
+    <input type="checkbox" name="todo" value="Bike"> I have a bike<br>
+    <input type="checkbox" name="todo" value="Car" checked> I have a car<br>
+    <input type="submit" value="SAVE">
+  </form> -->
+
+
+  <%  results.forEach(function(json){%>
+    <form action="" method="POST">
+    <%for(var i = 0; i < Object.keys(json.content).length; i += 2 ) { %>
+      <input type="checkbox" name="todo" value="<%=json.content[Object.keys(json.content)[i]]%>" <% if(json.content[Object.keys(json.content)[i+1]]){%> checked<%}%> > <%=json.content[Object.keys(json.content)[i]]%><br>
+      <br>
+      <%}%>
+      <input type="submit" value='SAVE'/>
+    </form>
+    <br><br>
+  <%})%>
+
+</div>
+</body>
+</html>

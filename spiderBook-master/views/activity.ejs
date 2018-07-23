@@ -1,0 +1,72 @@
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>Books</title>
+
+    <!-- Bootstrap core CSS -->
+    <link rel="stylesheet" type="text/css" href="../../public/bootstrap.css">
+    <!-- Custom styles for this template -->
+    <link rel="stylesheet" type="text/css" href="../../public/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  </head>
+
+  <body >
+
+    <nav class="navbar navbar-dark bg-dark fixed-top">
+      <a class="navbar-brand" href="">Books</a>
+      <div>
+        <ul class="nav nav-pills float-right">
+          <li>
+            <form class="form-inline my-2 my-lg-0" method="POST" action="/query">
+              <select class="form-control mr-sm-2" name="category">
+                <option value="intitle:">Title</option>
+                <option value="isbn:">ISBN</option>
+                <option value="inauthor:">Author</option>
+                <option value="inpublisher:">Publisher</option>
+                <option value="subject:">Subject</option>
+              </select>
+              <input class="form-control mr-sm-2" type="text" placeholder="Search Books" name="search" data-toggle="popover" data-placement="bottom" autocomplete="off">
+              <button style="background:#343a40;padding:0px " class="btn  my-2 my-sm-0" type="submit"><i class="fa fa-search" style="font-size:25px;color:white;cursor:pointer"></i></button>
+            </form>
+        </li>
+          <li class="nav-item active">
+            <a class="nav-link" style="color:white; font-size:large" href="/">Home <span class="sr-only">(current)</span></a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" style="color:white; font-size:large" href="/<%=user%>/friends">Friends</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" style="color:white; font-size:large" href="">Activity</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" style="color:white; font-size:large" href="/logout">Logout</a>
+        </ul>
+      </div>
+    </nav>
+
+
+
+      <div class="starter-template">
+        <div id="display">
+          <h3>Activity</h3>
+          <%activity.forEach(function(act){%>
+            <%if(act.type=='want'){%>
+              <strong><%=activityUser%></strong> wants to read <h4><%= act.title%></h4><br><br>
+            <%}%>
+            <%if(act.type=='read'){%>
+              <strong><%=activityUser%></strong>  read <h4><%= act.title%></h4><br><br>
+            <%}%>
+            <%if(act.type=='reading'){%>
+              <strong><%=activityUser%></strong> is reading <h4><%= act.title%></h4><br><br>
+            <%}%>
+          <%})%>
+        </div>
+      </div>
+  </body>
+</html>

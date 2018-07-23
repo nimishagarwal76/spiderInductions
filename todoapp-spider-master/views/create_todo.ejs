@@ -1,0 +1,85 @@
+<html>
+<head>
+	<title>ToDoApp</title>
+  <link rel="stylesheet" type="text/css" href="../../../public/styles.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script>
+  $(document).ready(function(){
+   console.log('a');
+   show = document.querySelector('#show');
+   var data = [];
+    var addBtn = document.querySelector('#addBtn');
+    var addInput = document.querySelector('#addInput');
+    addBtn.addEventListener('click',function(e){
+      e.preventDefault();
+      data.push({content : addInput.value , checked : 1});
+      addInput.value="";
+      console.log(data);
+      show.innerHTML='';
+      data.forEach(function(task){
+        const cli=document.createElement('li');
+        show.appendChild(cli);
+        cli.textContent = task.content;
+                console.log(show);
+        // console.log(task.content);
+      });
+
+    });
+
+
+    $('form').on('submit', function(){
+
+        $.ajax({
+          type: 'POST',
+          url: '/todoapp/:user/create_todo',
+          data: {value : data},
+          success: function(val){
+            // location.reload();
+            // console.log('dsa');
+            window.location.href='/todoapp/'+val+'/all_todo';
+
+          }
+        });
+
+        return false;
+
+    });
+
+    // $('li').on('click', function(){
+    //     var item = $(this).text().replace(/ /g, "-");
+    //     $.ajax({
+    //       type: 'DELETE',
+    //       url: '/todo/' + item,
+    //       success: function(data){
+    //         //do something with the data via front-end framework
+    //         location.reload();
+    //       }
+    //     });
+    // });
+
+  });
+
+  </script>
+  <style>
+  #show{
+  margin-left: 15%	;
+  margin-top: 5%;
+  }
+  </style>
+</head>
+<body>
+<% include partials/header.ejs %>
+<div class ="main">
+  <!-- This will contain form to make notes -->
+  <form method="POST" action="" >
+  	<label >Tasks</label><br>
+  	<input type="text" name="task" id="addInput">
+  	<input type="submit" value="ADD" id="addBtn"/>
+    <input type="submit" value="SAVE">
+  </form>
+    <!-- <a href="/todoapp/home"><span>SAVE</span></a> -->
+</div>
+<div id = "show">
+</div>
+</body>
+</html>

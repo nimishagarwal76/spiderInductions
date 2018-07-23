@@ -1,0 +1,166 @@
+  canvas{
+      border:0;
+      background:lavender;
+  }
+  
+  html, body{
+      width: 100%;
+      height: 100%;
+      margin: 0px;
+      border: 0;
+      overflow: hidden; /*  Disable scrollbars */
+      display: block;  /* No floating content on sides */
+  }
+
+  #header{
+     height:5%;
+     font-family:monospace;
+     font-size:xx-large;
+  }
+
+  #control{
+     height:10%;
+  }
+
+  #firebtn{
+    cursor:pointer;
+    font-family:monospace;
+    font-size:xx-large;
+    float:left;
+    border:solid 1px;
+    padding:2px;
+    border-radius:4px;
+    background:yellow;
+    margin-left:2%;
+    margin-top:10px;
+  }
+
+    #anglebtn{
+    cursor:pointer;
+    font-family:monospace;
+    font-size:xx-large;
+    float:right;
+    border:solid 1px;
+    padding:2px;
+    border-radius:4px;
+    background:lightgreen;
+    margin-left:2%;
+    margin-top:10px;
+  }
+
+    #powerbtn{
+    cursor:pointer;
+    font-family:monospace;
+    font-size:xx-large;
+    float:right;
+    border:solid 1px;
+    padding:2px;
+    border-radius:4px;
+    background:red;
+    margin-left:2%;
+    margin-top:10px;
+  }
+
+  #angle{
+    display:none;
+  }
+
+  #power{
+    display:none;
+
+  }
+
+  #inputpower{
+    border-radius:6px;
+    height:30px;
+    font-size:large;
+    text-align:center;
+    margin-left:40%
+  }
+
+  #powersave{
+    margin-left:4%;
+    border:solid 1px;
+    border-radius:3px;
+    padding:5px;
+    cursor:pointer;
+  }
+
+  #inputangle{
+    border-radius:6px;
+    height:30px;
+    font-size:large;
+    text-align:center;
+    margin-left:40%
+    
+  }
+
+  #anglesave{
+    margin-left:4%;
+    border:solid 1px;
+    border-radius:3px;
+    padding:5px;
+    cursor:pointer;
+  }
+
+  #pause{
+    font-size:large;
+    border:solid 1px;
+    padding:2px;
+    border-radius:4px;
+    display:inline-block;
+    margin-left:4px;
+    cursor:pointer;
+  }
+
+ #play{
+    font-size:large;
+    border:solid 1px;
+    padding:2px;
+    border-radius:4px;
+    display:none;
+    margin-left:4px;
+    cursor:pointer;
+  }
+
+  #restart{
+    font-size:large;
+    border:solid 1px;
+    padding:2px;
+    border-radius:4px;
+    float:right;
+    margin-top:4px;
+    margin-right:4px;
+    color:black;
+    cursor:pointer;
+  }
+
+  #gamename{
+    color:darkblue;
+    font-weight:bolder;
+    margin-left:10%;
+    cursor:default;
+  }
+
+  #instruction{
+   font-size:large;
+    border:solid 1px;
+    padding:2px;
+    border-radius:4px;
+    margin-top:4px;
+    color:black;
+    cursor:pointer;
+  }
+
+  #weapons{
+    cursor:pointer;
+    font-family:monospace;
+    font-size:xx-large;
+    float:right;
+    border:solid 1px;
+    padding:1%;
+    border-radius:4px;
+    background:#e5aee6;
+    margin-left:2%;
+    margin-top:5px;
+  }

@@ -1,0 +1,168 @@
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>Books</title>
+
+    <!-- Bootstrap core CSS -->
+    <link rel="stylesheet" type="text/css" href="../../public/bootstrap.css">
+    <!-- Custom styles for this template -->
+    <link rel="stylesheet" type="text/css" href="../../public/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <style>
+  .popover {
+    width : 300px;
+}
+#thumbnail{
+  height: 176px;
+  width:128px;
+}
+  </style>
+  </head>
+
+  <body >
+
+    <nav class="navbar navbar-dark bg-dark fixed-top">
+      <a class="navbar-brand" href="">Books</a>
+      <div>
+        <ul class="nav nav-pills float-right">
+          <li>
+            <form class="form-inline my-2 my-lg-0" method="POST" action="/query">
+              <select class="form-control mr-sm-2" name="category">
+                <option value="intitle:">Title</option>
+                <option value="isbn:">ISBN</option>
+                <option value="inauthor:">Author</option>
+                <option value="inpublisher:">Publisher</option>
+                <option value="subject:">Subject</option>
+              </select>
+              <input class="form-control mr-sm-2" type="text" placeholder="Search Books" name="search" data-toggle="popover" data-placement="bottom" autocomplete="off">
+              <button style="background:#343a40;padding:0px " class="btn  my-2 my-sm-0" type="submit"><i class="fa fa-search" style="font-size:25px;color:white;cursor:pointer"></i></button>
+            </form>
+        </li>
+          <li class="nav-item active">
+            <a class="nav-link" style="color:white; font-size:large" href="">Home <span class="sr-only">(current)</span></a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" style="color:white; font-size:large" href="/<%=user%>/friends">Friends</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" style="color:white; font-size:large" href="/<%=user%>/activity">Activity</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" style="color:white; font-size:large" href="/logout">Logout</a>
+        </ul>
+      </div>
+    </nav>
+
+
+
+      <div class="starter-template">
+        <div id="display">
+          BOOKSHELF:
+          <ul>
+          <li>READING
+          <div id="reading">
+            <ul>
+              <%books.reading.forEach(function(book){%>
+                <li><a href="/<%=user%>/<%=book.id%>"><%=book.title%></a></li>
+              <%})%>
+            </ul>
+          </div>
+          </li>
+          <li>WANT TO READ
+            <div id="want">
+              <ul>
+              <%books.want.forEach(function(book){%>
+                <li><a href="/<%=user%>/<%=book.id%>"><%=book.title%></a></li>
+              <%})%>
+            </ul>
+            </div>
+          </li>
+          <li>READ
+          <div id="read">
+            <ul>
+            <%books.read.forEach(function(book){%>
+              <li><a href="/<%=user%>/<%=book.id%>"><%=book.title%></a></li>
+            <%})%>
+          </ul>
+          </div>
+          </li>
+        </ul>
+        Favourite:
+        <div id="favourite">
+          <ul>
+          <%books.favourite.forEach(function(book){%>
+            <li><a href="/<%=user%>/<%=book.id%>"><%=book.title%></a></li>
+          <%})%>
+        </ul>
+        </div>
+        </div>
+      </div>
+      <script>
+
+      // $(document).ready(function(){
+      //   $('[data-toggle="popover"]').popover({html:true,content:"1saassssssssssssssssssssssssssssssssss<br>2sssss<br>3"});
+      // });
+
+    //     var http = new XMLHttpRequest();
+    //     var url ="/ajax/bookshelf";
+    //     var want = document.getElementById('want');
+    //     var read = document.getElementById('read');
+    //     var reading = document.getElementById('reading');
+    //     var favourite = document.getElementById('favourite');
+    //     http.open("GET", url, true);
+    //     http.send(null);
+    //     http.onreadystatechange=function(){
+    //      if (http.readyState==4 && http.status==200){
+    //       num = JSON.parse(http.responseText);
+    //
+    //      console.log('num',num.want);
+    //      num.want.forEach(function(id){
+    //        console.log('inWant',id);
+    //        var fetchURL = `https://www.googleapis.com/books/v1/volumes/${id}?key=AIzaSyBb5GaFXlvkaw-tDgEwhZ-Jj1hpRn6laos`;
+    //        fetch(fetchURL)
+    //        .then((res)=>res.json())
+    //        .then((data)=>{
+    //          var linkURL = '<%=user%>/'+data.id;
+    //          want.innerHTML+=`<a href=${linkURL}><img src= ${data.volumeInfo.imageLinks.smallThumbnail} id="thumbnail"/></a>&nbsp&nbsp&nbsp&nbsp`;
+    //        });
+    //      })
+    //      num.read.forEach(function(id){
+    //        fetchURL = `https://www.googleapis.com/books/v1/volumes/${id}?key=AIzaSyBb5GaFXlvkaw-tDgEwhZ-Jj1hpRn6laos`;
+    //        fetch(fetchURL)
+    //        .then((res)=>res.json())
+    //        .then((data)=>{
+    //          var linkURL = '<%=user%>/'+data.id;
+    //          console.log(data);
+    //          read.innerHTML+=`<a href=${linkURL}><img src= ${data.volumeInfo.imageLinks.smallThumbnail} id="thumbnail"/></a>&nbsp&nbsp&nbsp&nbsp`;
+    //        });
+    //      })
+    //      num.reading.forEach(function(id){
+    //        fetchURL = `https://www.googleapis.com/books/v1/volumes/${id}?key=AIzaSyBb5GaFXlvkaw-tDgEwhZ-Jj1hpRn6laos`;
+    //        fetch(fetchURL)
+    //        .then((res)=>res.json())
+    //        .then((data)=>{
+    //          var linkURL = '<%=user%>/'+data.id;
+    //          reading.innerHTML+=`<a href=${linkURL}><img src= ${data.volumeInfo.imageLinks.smallThumbnail} id="thumbnail"/></a>&nbsp&nbsp&nbsp&nbsp`;
+    //        });
+    //      })
+    //      num.favourite.forEach(function(id){
+    //        fetchURL = `https://www.googleapis.com/books/v1/volumes/${id}?key=AIzaSyBb5GaFXlvkaw-tDgEwhZ-Jj1hpRn6laos`;
+    //        fetch(fetchURL)
+    //        .then((res)=>res.json())
+    //        .then((data)=>{
+    //          var linkURL = '<%=user%>/'+data.id;
+    //          favourite.innerHTML+=`<a href=${linkURL}><img src= ${data.volumeInfo.imageLinks.smallThumbnail} id="thumbnail"/></a>&nbsp&nbsp&nbsp&nbsp`;
+    //        });
+    //      })
+    //
+    // }};
+      </script>
+
+  </body>
+</html>

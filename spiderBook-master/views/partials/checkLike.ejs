@@ -1,0 +1,19 @@
+<%
+checkLike = function(id,data)
+{
+  for (var i=0; i < data.book.length; i++) {
+     if (data.book[i].id == id) {
+       console.log('why',data.book[i]);
+       if(data.book[i].like)
+        {
+          return true;
+        }
+        else
+        {
+          return false;
+        }
+     }
+ }
+ return false;
+}
+%>

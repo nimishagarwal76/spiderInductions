@@ -1,0 +1,36 @@
+<html>
+<head>
+	<title>ToDoApp</title>
+  <link rel="stylesheet" type="text/css" href="../../../public/styles.css">
+</head>
+<body>
+<% include partials/header.ejs %>
+<div class ="main">
+	<h2>CREATE NOTE</h2>
+  <!-- This will contain form to make notes -->
+  <form method="POST" action="" >
+  	<label >Title</label><br>
+  	<input type="text" name="title"><br><br>
+  	<label >Description</label><br>
+  	<input type="text" name="content"><br><br>
+		<label >Label</label><br>
+		<input type="text" name="label"><br><br>
+		<label >Importance</label><br><br>
+		<label >Low</label>
+		<input type="radio" name="importance" checked="checked" value = 1><br>
+		<label >Medium</label>
+		<input type="radio" name="importance" value = 2><br>
+		<label >High</label>
+		<input type="radio" name="importance" value = 3><br>
+		<br><br>
+  	<input type="submit" value="submit"/>
+  </form>
+	<!-- <form method="POST" action="" enctype="multipart/form-data" >
+		<label >Add Image</label>&nbsp&nbsp
+		<input type="file" name="myImage"><br>
+		<input type="submit" value="Add"/>
+	</form> -->
+
+</div>
+</body>
+</html>

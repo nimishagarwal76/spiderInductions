@@ -1,0 +1,45 @@
+<html>
+<head>
+	<title>ToDoApp</title>
+  <link rel="stylesheet" type="text/css" href="../../../public/styles.css">
+</head>
+<body>
+<% include partials/header.ejs %>
+<div class ="main">
+		<div class="note">
+		Label :<%= data.label %>
+    <strong><li style="font-size:xx-large"><%= data.title %></li></strong>
+    <li style="font-size:large"><%= data.content %></li>
+		<br><br>
+		<form method="POST" action="" >
+	  	<label >Add A User</label><br>
+	  	<input type="text" name="owner" placeholder="username">
+			<input type="submit" value="GO">
+		</form>
+		<form method="POST" action="/todoapp/<%=user%>/note/<%=id%>/remove" >
+			<label >REMOVE A User</label><br>
+			<input type="text" name="owner" placeholder="username">
+			<input type="submit" value="GO">
+		</form>
+		<form method="POST" action="/todoapp/<%=user%>/note/<%=id%>/addimage" enctype="multipart/form-data" >
+			<label >Add Image</label><br>
+			<input type="file" name="myImage"><br><br>
+			<input type="submit" value="Add"/>
+		</form>
+		<br>
+		<% data.pictures.forEach(function(picture){ %>
+				<!-- <li><%= picture%></li> -->
+				<%if(picture != "" ){%>
+				<img src="../../.<%= picture%>" alt="" class ="picture"/>
+		<% }}) %>
+
+		<!-- <a ><span>REMOVE A USER</span></a> -->
+		<li style="font-size:medium">Contributors: <%= data.owner %></li><br>
+		<li class='date'>Created:<%= data.date%></li>
+		<li class='date'>Edited:<%= data.edited%></li>
+		<br>
+		<a href=<%= data.url%>/delete>Delete<span></a></span><br>
+		<a href=<%= data.url%>/update><span>Update</span></a><br>
+</div>
+</body>
+</html>

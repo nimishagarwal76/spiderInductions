@@ -1,0 +1,28 @@
+<html>
+<head>
+	<title>ToDoApp</title>
+  <link rel="stylesheet" type="text/css" href="../../public/styles.css">
+  <style>
+  .main{
+  margin-left: 15%	;
+  margin-top: 2.5%;
+  }
+  </style>
+</head>
+<body>
+  <% include partials/header.ejs %>
+  <div class ="main">
+
+    <%  results.forEach(function(json){%>
+			<a href="todo/<%= json._id%>/update"><div class = "note">
+      <%for(var i = 0; i < Object.keys(json.content).length; i += 2 ) { %>
+	      <%=json.content[Object.keys(json.content)[i]]%>
+				<br>
+	      <%}%>
+			</div></a>
+      <br><br>
+    <%})%>
+
+</div>
+</body>
+</html>

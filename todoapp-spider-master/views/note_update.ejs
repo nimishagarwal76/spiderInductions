@@ -1,0 +1,20 @@
+<html>
+<head>
+	<title>ToDoApp</title>
+  <link rel="stylesheet" type="text/css" href="../../../../public/styles.css">
+</head>
+<body>
+<% include partials/header.ejs %>
+<div class ="main">
+  <form method="POST" action="">
+  	<label >Title</label>
+  	<input type="text" name="title" value="<%= data.title%>">
+  	<label >Description</label>
+  	<input type="text" name="content" value="<%= data.content%>">
+		<label >Label</label>
+		<input type="text" name="label" value="<%= data.label%>">
+  	<input type="submit" value="Update"/>
+  </form>
+</div>
+</body>
+</html>

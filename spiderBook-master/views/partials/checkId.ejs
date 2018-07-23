@@ -1,0 +1,12 @@
+<%
+checkId = function(id,data)
+{
+  for (var i=0; i < data.book.length; i++) {
+     if (data.book[i].id == id) {
+       console.log('hey');
+         return true;
+     }
+ }
+ return false;
+}
+%>
