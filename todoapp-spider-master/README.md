@@ -1,16 +1,15 @@
-# todoapp-spider
-this is a todoapp built for spider inductions
+# Todoapp
+This is a todoapp built for spider inductions
 
-RUN -
-* install node js
-* install mongodb
-* clone the repository
-* open mongodb
-* open todoapp folder ;that is cloned;
-* open cmd line in the folder
+## RUN -
 * npm install
 * npm start
-* if you recieve message connection made ; everything is good
-* in your browser "http://127.0.0.1:3000/todoapp/home"
 
+## FEATURES
+* Users able to sign in and sign up
+* Create Notes with a title for each note
+* Multiple collaborators for a list, users able to add
+other users, delete them as per their wish
+* Add images
+* Sort on basis of importance, time
 
