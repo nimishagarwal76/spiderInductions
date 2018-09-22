@@ -1,17 +1,17 @@
-# spiderBook
-this is a bookapp built for spider inductions
+# Boookopedia
+This is a clone of GoodReads built for Spider(R&D club of NIT Trichy) inductions
 
-RUN -
-* install node js
-* install mongodb
-* clone the repository
-* open mongodb
-* open spiderBook folder ;that is cloned;
-* open cmd line in the folder
+## RUN -
 * npm install
 * npm start
-* if you recieve message 'app now listening for requests at port 3000 ;Connection has been made, now make fireworks...'
-then everything is good   
-* in your browser "http://127.0.0.1:3000/home"
+ 
+## Technology
+* NodeJS
+* MongoDB
+
+## Features
+* Book Searches(Information retrieved from Google Book Api)
+* People can like, rate and comment on books
+* They can serch by name, title, author etc.
 
 
